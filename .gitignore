@@ -1,0 +1,4 @@
+/htdocs/*
+!/htdocs/.gitkeep
+/typo3_src-9.5.14
+/typo3_src-9.5.14.tar.gz
