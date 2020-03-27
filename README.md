@@ -22,11 +22,14 @@ Enjoy!
 
 ## Windows and Symlinks
 
-To show the symlinks correctly on Windows you have to enable the Developer Mode
-or the linked folders and files are shown as normal text files with some
-information about the target inside. This does not hurt the functionality but
-could be a little bit confusing on the host side if you don't know about this
-behavior.
+To create and show the symlinks correctly on Windows you have to enable the
+Developer Mode or start your shell (Git Bash, cmd, PowerShell etc.) elevated
+(as adminstrator).
+
+Otherwise the linked folders and files are shown as normal files with some text
+information about the target inside. This does not hurt the functionality in
+the but container but could be a little bit confusing on the host side if you
+don't know about this behavior.
 
 ## Links
 

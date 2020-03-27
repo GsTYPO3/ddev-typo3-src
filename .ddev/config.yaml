@@ -17,8 +17,10 @@ hooks:
   - exec: test -d typo3_src-9.5.14 || tar xzf typo3_src-9.5.14.tar.gz
   - exec: test -d htdocs || mkdir -p htdocs
   - exec: test -h htdocs/typo3_src || (cd htdocs && ln -s ../typo3_src-9.5.14 typo3_src)
+  - exec-host: ddev composer about>/dev/null
   - exec: test -h htdocs/index.php || (cd htdocs && ln -s typo3_src/index.php index.php)
-  - exec: test -h htdocs/typo3 || (cd htdocs && ln -s typo3_src/typo3 typo3)
+  - exec: test -h htdocs/typo3 || (cd htdocs && ln -s typo3_src/typo3 typo3 && composer about>/dev/null)
+  - exec-host: ddev composer about>/dev/null
   - exec: test -f htdocs/typo3conf/LocalConfiguration.php || touch htdocs/FIRST_INSTALL
   - exec-host: ddev launch typo3/install.php
 use_dns_when_possible: true
