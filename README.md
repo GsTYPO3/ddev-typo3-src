@@ -20,6 +20,14 @@ a name for the site if you like.
 
 Enjoy!
 
+## Windows and Symlinks
+
+To show the symlinks correctly on Windows you have to enable the Developer Mode
+or the linked folders and files are shown as normal text files with some
+information about the target inside. This does not hurt the functionality but
+could be a little bit confusing on the host side if you don't know about this
+behavior.
+
 ## Links
 
 * [Install Docker](https://docs.docker.com/#docker-products)
