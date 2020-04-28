@@ -13,11 +13,11 @@ nfs_mount_enabled: false
 provider: default
 hooks:
   post-start:
-  - exec: test -f typo3_src-9.5.16.tar.gz || wget --content-disposition https://get.typo3.org/9.5.16
-  - exec: test -d typo3_src-9.5.16 || tar xzf typo3_src-9.5.16.tar.gz
+  - exec: test -f typo3_src-10.4.1.tar.gz || wget --content-disposition https://get.typo3.org/10.4.1
+  - exec: test -d typo3_src-10.4.1 || tar xzf typo3_src-10.4.1.tar.gz
   - exec: test -d htdocs || mkdir -p htdocs
   - exec: test -h htdocs/typo3_src && rm htdocs/typo3_src
-  - exec: cd htdocs && ln -s ../typo3_src-9.5.16 typo3_src
+  - exec: cd htdocs && ln -s ../typo3_src-10.4.1 typo3_src
   - exec-host: ddev composer about>/dev/null
   - exec: test -h htdocs/index.php || (cd htdocs && ln -s typo3_src/index.php index.php)
   - exec: test -h htdocs/typo3 || (cd htdocs && ln -s typo3_src/typo3 typo3 && composer about>/dev/null)
