@@ -1,6 +1,6 @@
 # TYPO3 Legacy Installation with Symlinks using DDEV Local
 
-This repository demonstrates the installation of TYPO3 9.5 with symlinks
+This repository demonstrates the installation of TYPO3 with symlinks
 according the [Official Documentation](https://docs.typo3.org/m/typo3/guide-installation/9.5/en-us/QuickInstall/GetAndUnpack/Index.html).
 
 The installation steps are done on `ddev start` if TYPO3 is not already setup.
@@ -12,6 +12,8 @@ the post-start hooks which are doing the whole magic.
 * Install Docker and DDEV Local (and on Windows also Git)
 * Download and extract [this repository](https://github.com/GsTYPO3/ddev-typo3-src/archive/master.zip)
 * Open a shell, head to the installation folder created before and run `ddev start`
+
+Please note there are various branches and tags for TYPO3 9.5.x and 10.4.x.
 
 A new browser window opens and shows you the TYPO3 Install Tool. Follow the
 installation steps, most of the settings are already preconfigured by DDEV
