@@ -1,0 +1,12 @@
+version: '3.6'
+
+services:
+  web:
+    environment:
+      - TYPO3_CONTEXT=Development
+      - TYPO3_SRC_VERSION=10.4.4
+    volumes:
+      - type: tmpfs
+        target: /var/www/html/htdocs/typo3temp/var/cache
+        tmpfs:
+          size: 268435456
