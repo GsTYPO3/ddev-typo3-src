@@ -4,7 +4,7 @@ services:
   web:
     environment:
       - TYPO3_CONTEXT=Development
-      - TYPO3_SRC_VERSION=11.0.0
+      - TYPO3_SRC_VERSION=6.2.31
 #    volumes:
 #      - type: tmpfs
 #        target: /var/www/html/htdocs/typo3temp/var/cache

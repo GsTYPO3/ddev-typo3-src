@@ -1,13 +1,13 @@
 type: typo3
 docroot: htdocs
-php_version: "7.4"
+php_version: "5.6"
 webserver_type: nginx-fpm
 router_http_port: "80"
 router_https_port: "443"
 xdebug_enabled: false
 additional_hostnames: []
 additional_fqdns: []
-mariadb_version: "10.3"
+mariadb_version: "10.1"
 mysql_version: ""
 provider: default
 hooks:
@@ -23,8 +23,8 @@ hooks:
   - exec: test -h htdocs/typo3 || (cd htdocs && ln -s typo3_src/typo3 typo3 && composer
       about>/dev/null)
   - exec-host: ddev composer about>/dev/null
-  - exec: test -f htdocs/typo3conf/LocalConfiguration.php || touch htdocs/FIRST_INSTALL
-  - exec-host: ddev launch typo3/install.php
+  - exec: test -f htdocs/typo3conf/LocalConfiguration.php || touch htdocs/typo3conf/ENABLE_INSTALL_TOOL
+  - exec-host: ddev launch
 use_dns_when_possible: true
 composer_version: ""
 
