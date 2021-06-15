@@ -1,6 +1,6 @@
 type: typo3
 docroot: htdocs
-php_version: "5.6"
+php_version: "7.3"
 webserver_type: nginx-fpm
 router_http_port: "80"
 router_https_port: "443"
@@ -18,7 +18,7 @@ use_dns_when_possible: true
 composer_version: ""
 web_environment:
 - TYPO3_CONTEXT=Development
-- TYPO3_MAJOR_VERSION=6
+- TYPO3_MAJOR_VERSION=7
 - TYPO3_SRC_VERSION=
 
 
