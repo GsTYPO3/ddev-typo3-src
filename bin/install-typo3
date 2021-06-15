@@ -1,0 +1,122 @@
+#!/bin/bash
+
+# Force some bash options see https://gist.github.com/mohanpedala/1e2ff5661761d3abd0385e8223e16425
+set -euo pipefail
+IFS=$'\n\t'
+
+# Fallback to version 11 if not defined
+TYPO3_MAJOR_VERSION=${TYPO3_MAJOR_VERSION:-11}
+
+# Define some colors
+COLOR_RESET='\033[0m'
+COLOR_INFORMATION='\033[32m'
+COLOR_WARNING='\033[33m'
+COLOR_ERROR='\033[31m'
+
+# Show script information
+echo ""
+echo -e "${COLOR_INFORMATION}TYPO3 Install Script  ${COLOR_WARNING}(c) 2021 Gilbertsoft LLC${COLOR_RESET}"
+echo ""
+
+# Let the user overwrite the desired version
+if [[ -z "${TYPO3_SRC_VERSION:-}" ]]; then
+    # Try to get latest release of major version
+    TYPO3_RELEASE_JSON=$(curl -sSX GET "https://get.typo3.org/v1/api/major/${TYPO3_MAJOR_VERSION}/release/latest" -H  "accept: application/json")
+    TYPO3_RELEASE_STATUS=$(echo "${TYPO3_RELEASE_JSON}" | jq -r '.status')
+
+    if [[ "${TYPO3_RELEASE_STATUS}" != "null" ]]; then
+        echo -e "${COLOR_WARNING}No release found for major version${COLOR_RESET}"
+        echo -e "  Version: ${COLOR_ERROR}${TYPO3_MAJOR_VERSION}${COLOR_RESET}"
+        echo -e "  Status: ${COLOR_ERROR}${TYPO3_RELEASE_STATUS}${COLOR_RESET}"
+        echo -e "  Response: ${COLOR_ERROR}${TYPO3_RELEASE_JSON}${COLOR_RESET}"
+        echo ""
+        exit 1
+    fi
+
+    TYPO3_SRC_VERSION=$(echo "${TYPO3_RELEASE_JSON}" | jq -r '.version')
+else
+    TYPO3_MAJOR_VERSION=""
+fi
+
+# Prepare version information
+TYPO3_SRC_DIRECTORY=typo3_src-${TYPO3_SRC_VERSION}
+TYPO3_SRC_ARCHIVE=${TYPO3_SRC_DIRECTORY}.tar.gz
+
+# Show some base information
+echo -e "${COLOR_INFORMATION}Starting installation of TYPO3...${COLOR_RESET}"
+
+if [[ -n "${TYPO3_MAJOR_VERSION}" ]]; then
+    echo -e "  Major: ${COLOR_INFORMATION}${TYPO3_MAJOR_VERSION}${COLOR_RESET}"
+fi
+
+echo -e "  Version: ${COLOR_INFORMATION}${TYPO3_SRC_VERSION}${COLOR_RESET}"
+echo -e "  Destination: ${COLOR_INFORMATION}${TYPO3_SRC_DIRECTORY}${COLOR_RESET}"
+echo -e "  Web/Document Root: ${COLOR_INFORMATION}${DDEV_DOCROOT:?DDEV_DOCROOT is not defined}${COLOR_RESET}"
+echo ""
+
+# Check release
+TYPO3_RELEASE_JSON=$(curl -sSX GET "https://get.typo3.org/v1/api/release/${TYPO3_SRC_VERSION}" -H  "accept: application/json")
+TYPO3_RELEASE_STATUS=$(echo "${TYPO3_RELEASE_JSON}" | jq -r '.status')
+
+if [[ "${TYPO3_RELEASE_STATUS}" != "null" ]]; then
+    echo -e "${COLOR_WARNING}Release not found${COLOR_RESET}"
+    echo -e "  Version: ${COLOR_ERROR}${TYPO3_SRC_VERSION}${COLOR_RESET}"
+    echo -e "  Status: ${COLOR_ERROR}${TYPO3_RELEASE_STATUS}${COLOR_RESET}"
+    echo -e "  Response: ${COLOR_ERROR}${TYPO3_RELEASE_JSON}${COLOR_RESET}"
+    echo ""
+    exit 1
+fi
+
+# Download archive
+if [[ ! -f "${TYPO3_SRC_ARCHIVE}" ]]; then
+    echo -e "${COLOR_INFORMATION}Downloading TYPO3...${COLOR_RESET}"
+    curl -L -o "typo3_src-${TYPO3_SRC_VERSION}.tar.gz" "https://get.typo3.org/${TYPO3_SRC_VERSION}"
+    echo ""
+else
+    echo -e "${COLOR_INFORMATION}Archive found, skipping download.${COLOR_RESET}"
+    echo ""
+fi
+
+# Extract archive
+if [[ ! -d "${TYPO3_SRC_DIRECTORY}" ]]; then
+    echo -e "${COLOR_INFORMATION}Extract TYPO3...${COLOR_RESET}"
+    echo -e "  ${TYPO3_SRC_ARCHIVE} -> ${TYPO3_SRC_DIRECTORY}"
+    tar xzf "${TYPO3_SRC_ARCHIVE}"
+    echo ""
+else
+    echo -e "${COLOR_INFORMATION}Source directory found, skipping extraction.${COLOR_RESET}"
+    echo ""
+fi
+
+# Create doc root if missing
+if [[ ! -d "${DDEV_DOCROOT}" ]]; then
+    echo -e "${COLOR_INFORMATION}Create doc root \"${DDEV_DOCROOT}\"...${COLOR_RESET}"
+    mkdir -p "${DDEV_DOCROOT}"
+    echo ""
+fi
+
+# Setup links according to the docs see https://docs.typo3.org/m/typo3/guide-installation/master/en-us/QuickInstall/GetAndUnpack/Index.html
+echo -e "${COLOR_INFORMATION}Create symlinks...${COLOR_RESET}"
+
+echo -e "  ${TYPO3_SRC_DIRECTORY} -> ${DDEV_DOCROOT}/typo3_src"
+ln -frs "${TYPO3_SRC_DIRECTORY}" "${DDEV_DOCROOT}/typo3_src"
+
+echo -e "  ${TYPO3_SRC_DIRECTORY}/index.php -> ${DDEV_DOCROOT}/index.php"
+ln -frs "${TYPO3_SRC_DIRECTORY}/index.php" "${DDEV_DOCROOT}/index.php"
+
+echo -e "  ${TYPO3_SRC_DIRECTORY}/typo3 -> ${DDEV_DOCROOT}/typo3"
+ln -frs "${TYPO3_SRC_DIRECTORY}/typo3" "${DDEV_DOCROOT}/typo3"
+
+echo ""
+
+# Create FIRST_INSTALL if TYPO3 is not setup
+if [[ ! -f "${DDEV_DOCROOT}/typo3conf/LocalConfiguration.php" ]]; then
+    echo -e "${COLOR_INFORMATION}TYPO3 seems not to be setup, creating files...${COLOR_RESET}"
+    echo -e "  ${DDEV_DOCROOT}/FIRST_INSTALL"
+    touch "${DDEV_DOCROOT}/FIRST_INSTALL"
+    echo ""
+fi
+
+# Show success information
+echo -e "${COLOR_INFORMATION}TYPO3 is installed and ready to setup!${COLOR_RESET}"
+echo ""
