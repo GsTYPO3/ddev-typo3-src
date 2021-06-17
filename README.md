@@ -10,12 +10,13 @@ the post-start hooks which are doing the whole magic.
 ## How to use
 
 * Install Docker and DDEV Local (and on Windows also Git)
-* Download and extract [this repository](https://github.com/GsTYPO3/ddev-typo3-src/archive/master.zip)
+* Download and extract [this repository](https://github.com/GsTYPO3/ddev-typo3-src/archive/refs/heads/6.2.zip)
+* [optional] Edit `[installation-folder]/.ddev/config.yaml` to your likings
 * Open a shell, head to the installation folder created before and run `ddev start`
 
 Please note there are various branches for all TYPO3 versions since 6.2.
 
-A new browser window opens and shows you the TYPO3 Install Tool. Follow the
+A new browser window opens and displays the TYPO3 Install Tool. Follow the
 installation steps, most of the settings are already preconfigured by DDEV
 like the database credentials. Just enter the administrator account credentials
 and set a name for the site if you like.
@@ -24,7 +25,7 @@ Enjoy!
 
 ## Configuration
 
-Each branch defines the `TYPO3_MAJOR_VERSION` variable and the install script
+Each branch defines the `TYPO3_MAJOR_VERSION` variable. The install script
 fetches the last release of this major version directly from `get.typo3.org`.
 
 It's also possible to install a specific release by defining `TYPO3_SRC_VERSION`
@@ -35,7 +36,7 @@ The default web / document root is set to `htdocs` which can be changed in the
 
 Also `PHP` and `Database` version can be changed in the `config.yaml`.
 
-To avoid side effects please adapt the configuration before the first
+To avoid side effects please adapt the configuration **before** the first
 `ddev start`.
 
 ## Windows and Symlinks
@@ -44,10 +45,10 @@ To create and show the symlinks correctly on Windows you have to enable the
 Developer Mode or start your shell (Git Bash, cmd, PowerShell etc.) elevated
 (as adminstrator).
 
-Otherwise the linked folders and files are shown as normal files with some text
-information about the target inside. This does not hurt the functionality in
-the but container but could be a little bit confusing on the host side if you
-don't know about this behavior.
+Otherwise the linked folders and files are shown as regular text files with some
+information about the target inside. This does not hurt the functionality,
+container but could be a little bit confusing on the host side if you
+are not awarae of this behavior.
 
 ## Links
 
