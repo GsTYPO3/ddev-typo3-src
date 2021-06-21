@@ -19,7 +19,7 @@ composer_version: ""
 web_environment:
 - TYPO3_CONTEXT=Development
 - TYPO3_MAJOR_VERSION=7
-- TYPO3_SRC_VERSION=
+- TYPO3_SRC_VERSION=7.6.32
 
 
 # This config.yaml was created with ddev version v1.17.5
