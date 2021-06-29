@@ -11,7 +11,7 @@ the post-start hooks which are doing the whole magic.
 
 * Install Docker and DDEV Local (and on Windows also Git)
 * Download and extract [this repository](https://github.com/GsTYPO3/ddev-typo3-src/archive/refs/heads/main.zip)
-* [optional] Edit `[installation-root-folder]/.ddev/config.yaml` to your likings
+* [optional] Edit `[installation-folder]/.ddev/config.yaml` to your likings
 * Open a shell, head to the installation folder created before and run `ddev start`
 
 Please note there are various branches for all TYPO3 versions since 6.2.
