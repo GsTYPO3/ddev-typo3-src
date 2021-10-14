@@ -57,7 +57,7 @@ consideration that the offical upgrade guide recommends: [Upgrading TYPO3](https
 
 Here are all the steps to be considered in a nutshell:
 
-* Update all third-party extensions to their latest possible version.
+* Update all third-party extensions to their latest possible version
 * Deactivate all third-party extensions.
 * ⚠️ Export and backup the current database with: `ddev export --file=db_backup.sql`
 * Stop the project with `ddev stop`
