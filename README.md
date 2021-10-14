@@ -69,6 +69,7 @@ Here are all the steps to be considered in a nutshell:
 * Run `ddev start`
 * Login to the install tool
 * Run TYPO3's `Upgrade Wizard`: "Upgrade -> Upgrade Wizard"
+* Switch to the backend
 * Update extension list in "Admin Tools -> Extensions -> [dropdown] Get
   Extensions -> Update now"
 * Update third-party extensions
