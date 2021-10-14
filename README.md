@@ -50,6 +50,43 @@ information about the target inside. This does not hurt the functionality,
 container but could be a little bit confusing on the host side if you
 are not awarae of this behavior.
 
+## Upgrade
+
+If you want to upgrade your TYPO3 version, please take all the information into
+consideration that the offical upgrade guide recommends: [Upgrading TYPO3](https://docs.typo3.org/m/typo3/guide-installation/master/en-us/).
+
+Here are all the steps to be considered in a nutshell:
+
+- Update all third-party extensions to their latest possible version.
+- Deactivate all third-party extensions.
+- Stop the project with `ddev stop`
+- !IMPORTANT: Export and backup the current database with: `ddev export --file=db_backup.sql`
+- Remove all symlinks that TYPO3 created, which are: `htdocs/typo3_src`, `htdocs/typo3`, `htdocs/index.php`
+- Remove `htdocs/typo3temp`
+- Adapt the settings in `.ddev/config.yaml` to your new requirements:
+  - `TYPO3_MAJOR_VERSION`
+  - `php_version`
+  - `mariadb_version` / `mysql_version`
+  - ...?
+- Make sure the install tool is enabled: `ddev exec touch htdocs/typo3conf/ENABLE_INSTALL_TOOL`
+- Run `ddev start`
+- !IMPORTANT: In case the database has been completely overwritten:
+  - Check, if database has been completely overwritten by opening the backend and trying to log in. If you cannot log in, the user has been deleted. (You can also check the database status with `ddev sequelace`, if you are on a Mac).
+  - Import your database backup with: `ddev import --src=db_back.sql`
+  - Run TYPO3's database compare: "Admin Tools -> Maintenance -> Analyze Database Structure"
+- Run TYPO3's `Upgrade Wizard`: "Admin Tools -> Upgrade -> Upgrade Wizard"
+- Update extension list in "Admin Tools -> Extensions -> [dropdown] Get Extensions -> Update now"
+- Update third-party extensions
+- Activate third-party extensions again
+
+### Upgrade Troubleshooting
+
+In case you experience troubles with the update, you might want to check things like these:
+
+- Have all third-party etensions been deactivated? If not, check the file `typo3conf/PackageStates.php` and delete all entries that point to a third-party extension. (If this was something you had to do, you might also want to check, if the folder `typo3temp` still exists and, if so, delete it)
+- Delete all files in `.ddev` except `config.yaml` and run `ddev start` again.
+- If you have developed you own custom extensions, make sure to adjust the version dependencies in `ext_emconf.php` in case you have defined any
+
 ## Links
 
 * [Install Docker](https://docs.docker.com/#docker-products)
