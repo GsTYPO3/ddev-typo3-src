@@ -84,7 +84,7 @@ like these:
   `typo3conf/PackageStates.php` and delete all entries that point to a
   third-party extension. (If this was something you had to do, you might also
   want to check, if the folder `typo3temp` still exists and, if so, delete it)
-* Delete all files in `.ddev` except `config.yaml` and run `ddev start` again.
+* Delete all files in `.ddev` except `config.yaml` and run `ddev start` again
 * If you have developed your own custom extensions, make sure to adjust the
   version dependencies in `ext_emconf.php` in case you have defined any
 * In case the database has been completely overwritten:
