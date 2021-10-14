@@ -47,8 +47,8 @@ Developer Mode or start your shell (Git Bash, cmd, PowerShell etc.) elevated
 
 Otherwise the linked folders and files are shown as regular text files with some
 information about the target inside. This does not hurt the functionality,
-container but could be a little bit confusing on the host side if you
-are not awarae of this behavior.
+but could be a little bit confusing on the host side if you are not aware of
+this behavior.
 
 ## Upgrade
 
