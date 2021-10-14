@@ -88,10 +88,16 @@ else
     echo ""
 fi
 
-# Create doc root if missing
+# Create or clean up doc root
 if [[ ! -d "${DDEV_DOCROOT}" ]]; then
     echo -e "${COLOR_INFORMATION}Create doc root \"${DDEV_DOCROOT}\"...${COLOR_RESET}"
     mkdir -p "${DDEV_DOCROOT}"
+    echo ""
+else
+    echo -e "${COLOR_INFORMATION}Clean up doc root \"${DDEV_DOCROOT}\"...${COLOR_RESET}"
+    test -e "${DDEV_DOCROOT}/typo3_src" && rm -rf "${DDEV_DOCROOT}/typo3_src"
+    test -e "${DDEV_DOCROOT}/index.php" && rm -rf "${DDEV_DOCROOT}/index.php"
+    test -e "${DDEV_DOCROOT}/typo3" && rm -rf "${DDEV_DOCROOT}/typo3"
     echo ""
 fi
 
