@@ -88,10 +88,16 @@ else
     echo ""
 fi
 
-# Create doc root if missing
+# Create or clean up doc root
 if [[ ! -d "${DDEV_DOCROOT}" ]]; then
     echo -e "${COLOR_INFORMATION}Create doc root \"${DDEV_DOCROOT}\"...${COLOR_RESET}"
     mkdir -p "${DDEV_DOCROOT}"
+    echo ""
+else
+    echo -e "${COLOR_INFORMATION}Clean up doc root \"${DDEV_DOCROOT}\"...${COLOR_RESET}"
+    test -e "${DDEV_DOCROOT}/typo3_src" && rm -rf "${DDEV_DOCROOT}/typo3_src"
+    test -e "${DDEV_DOCROOT}/index.php" && rm -rf "${DDEV_DOCROOT}/index.php"
+    test -e "${DDEV_DOCROOT}/typo3" && rm -rf "${DDEV_DOCROOT}/typo3"
     echo ""
 fi
 
@@ -114,6 +120,11 @@ if [[ ! -f "${DDEV_DOCROOT}/typo3conf/LocalConfiguration.php" ]]; then
     echo -e "${COLOR_INFORMATION}TYPO3 seems not to be setup, creating files...${COLOR_RESET}"
     echo -e "  ${DDEV_DOCROOT}/FIRST_INSTALL"
     touch "${DDEV_DOCROOT}/FIRST_INSTALL"
+    echo ""
+else
+    echo -e "${COLOR_INFORMATION}TYPO3 seems to be setup, creating files...${COLOR_RESET}"
+    echo -e "  ${DDEV_DOCROOT}/typo3conf/ENABLE_INSTALL_TOOL"
+    touch "${DDEV_DOCROOT}/typo3conf/ENABLE_INSTALL_TOOL"
     echo ""
 fi
 
