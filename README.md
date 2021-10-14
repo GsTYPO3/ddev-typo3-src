@@ -90,7 +90,7 @@ like these:
 * In case the database has been completely overwritten:
   * Check, if database has been completely overwritten by opening the backend
     and trying to log in. If you cannot log in, the user has been deleted. (You
-    can also check the database status with `ddev sequelace`, if you are on a Mac).
+    can also check the database status with `ddev sequelace`, if you are on a Mac)
   * Import your database backup with: `ddev import --src=db_back.sql`
   * Run TYPO3's database compare: "Admin Tools -> Maintenance -> Analyze
     Database Structure"
