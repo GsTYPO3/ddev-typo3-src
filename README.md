@@ -48,7 +48,7 @@ Developer Mode or start your shell (Git Bash, cmd, PowerShell etc.) elevated
 Otherwise the linked folders and files are shown as regular text files with some
 information about the target inside. This does not hurt the functionality,
 container but could be a little bit confusing on the host side if you
-are not awarae of this behavior.
+are not aware of this behavior.
 
 ## Upgrade
 
@@ -94,6 +94,32 @@ like these:
   * Import your database backup with: `ddev import --src=db_back.sql`
   * Run TYPO3's database compare: "Admin Tools -> Maintenance -> Analyze
     Database Structure"
+
+## Support for local extensions
+
+If you would like to implement local extensions, a composer-like setup is
+supported. All you have to do is
+
+- create a folder for your local extensions on root level (usually `packages`)
+- define `PACKAGES` in `.ddev/config.yaml` under the `web_environment` key:
+
+   ```bash
+   // .ddev/config.yaml
+   
+   [...]
+   composer_version: ""
+   web_environment:
+   - TYPO3=_MAJOR_VERSION=10
+   [...]
+   - PACKAGES=[your-folder-name]
+   
+   [...]
+   ```
+
+If you define `PACKAGES` without assigning it a value, the script will 
+automatically search for a `packages` folder.
+
+If `PACKAGES` isn't defined at all, this procedure is skipped completely.
 
 ## Links
 
