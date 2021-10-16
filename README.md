@@ -10,16 +10,25 @@ the post-start hooks which are doing the whole magic.
 ## How to use
 
 * Install Docker and DDEV Local (and on Windows also Git)
-* Download and extract [this repository](https://github.com/GsTYPO3/ddev-typo3-src/archive/refs/heads/main.zip)
+* Download and extract this repository (see links below)
 * [optional] Edit `[project-root-folder]/.ddev/config.yaml` to your likings
 * Open a shell, head to the installation folder created before and run `ddev start`
-
-Please note there are various branches for all TYPO3 versions since 6.2.
 
 A new browser window opens and displays the TYPO3 Install Tool. Follow the
 installation steps, most of the settings are already preconfigured by DDEV
 like the database credentials. Just enter the administrator account credentials
 and set a name for the site if you like.
+
+Please note there are various [branches](branches) for all TYPO3 versions since
+6.2. Each branch is preconfigured to the latest supported components like PHP
+and MariaDB:
+
+* [Download](archive/refs/heads/main.zip) for TYPO3 11.5
+* [Download](archive/refs/heads/10.4.zip) for TYPO3 10.4
+* [Download](archive/refs/heads/9.5.zip) for TYPO3 9.5
+* [Download](archive/refs/heads/8.7.zip) for TYPO3 8.7
+* [Download](archive/refs/heads/7.6.zip) for TYPO3 7.6
+* [Download](archive/refs/heads/6.2.zip) for TYPO3 6.2
 
 Enjoy!
 
