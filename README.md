@@ -103,11 +103,11 @@ the root level (default `packages`) and copy your local extensions to this
 folder where each subfolder is an extension.
 
 To use a folder other than `packages` overwrite the default with the variable
-`TYPO3_EXTENSIONS` in `.ddev/config.yaml` under the `web_environment` key:
+`TYPO3_LOCAL_EXTENSIONS` in `.ddev/config.yaml` under the `web_environment` key:
 
 ```yaml
 web_environment:
-- TYPO3_EXTENSIONS=[your-folder-name]
+- TYPO3_LOCAL_EXTENSIONS=[your-folder-name]
 ```
 
 ## Links

@@ -131,7 +131,7 @@ fi
 # Create symlinks for local extensions
 echo -e "${COLOR_INFORMATION}Create symlinks for local extensions...${COLOR_RESET}"
 
-for extension in "${TYPO3_EXTENSIONS:-packages}"/*; do
+for extension in "${TYPO3_LOCAL_EXTENSIONS:-packages}"/*; do
     if [ -d "${extension}" ] && [ ! -d "${DDEV_DOCROOT}/typo3conf/ext/${extension##*/}" ]; then
         echo -e "  $extension -> ${DDEV_DOCROOT}/typo3conf/ext/${extension##*/}"
         ln -frs "$extension" "${DDEV_DOCROOT}/typo3conf/ext/${extension##*/}"
