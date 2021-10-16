@@ -20,6 +20,7 @@ web_environment:
 - TYPO3_CONTEXT=Development
 - TYPO3_MAJOR_VERSION=6
 - TYPO3_SRC_VERSION=6.2.31
+- TYPO3_LOCAL_EXTENSIONS=
 
 
 # This config.yaml was created with ddev version v1.17.5
