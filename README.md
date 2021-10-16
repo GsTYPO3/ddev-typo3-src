@@ -98,28 +98,17 @@ like these:
 ## Support for local extensions
 
 If you would like to implement local extensions, a composer-like setup is
-supported. All you have to do is
+supported. All you have to do is create a folder for your local extensions at
+the root level (default `packages`) and copy your local extensions to this
+folder where each subfolder is an extension.
 
-- create a folder for your local extensions on root level (usually `packages`)
-- define `PACKAGES` in `.ddev/config.yaml` under the `web_environment` key:
+To use a folder other than `packages` overwrite the default with the variable
+`TYPO3_EXTENSIONS` in `.ddev/config.yaml` under the `web_environment` key:
 
-   ```bash
-   // .ddev/config.yaml
-   
-   [...]
-   composer_version: ""
-   web_environment:
-   - TYPO3=_MAJOR_VERSION=10
-   [...]
-   - PACKAGES=[your-folder-name]
-   
-   [...]
-   ```
-
-If you define `PACKAGES` without assigning it a value, the script will 
-automatically search for a `packages` folder.
-
-If `PACKAGES` isn't defined at all, this procedure is skipped completely.
+```yaml
+web_environment:
+- TYPO3_EXTENSIONS=[your-folder-name]
+```
 
 ## Links
 

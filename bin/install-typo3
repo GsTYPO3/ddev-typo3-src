@@ -102,7 +102,7 @@ else
 fi
 
 # Setup links according to the docs see https://docs.typo3.org/m/typo3/guide-installation/master/en-us/QuickInstall/GetAndUnpack/Index.html
-echo -e "${COLOR_INFORMATION}Create symlinks...${COLOR_RESET}"
+echo -e "${COLOR_INFORMATION}Create symlinks for TYPO3...${COLOR_RESET}"
 
 echo -e "  ${TYPO3_SRC_DIRECTORY} -> ${DDEV_DOCROOT}/typo3_src"
 ln -frs "${TYPO3_SRC_DIRECTORY}" "${DDEV_DOCROOT}/typo3_src"
@@ -128,13 +128,13 @@ else
     echo ""
 fi
 
-# Create symlinks for local packages
-echo -e "${COLOR_INFORMATION}Create symlinks for packages...${COLOR_RESET}"
+# Create symlinks for local extensions
+echo -e "${COLOR_INFORMATION}Create symlinks for local extensions...${COLOR_RESET}"
 
-for ext in ${PACKAGES:-packages}/*; do
-    if [ -d "${ext}" ] && [ ! -d "${DDEV_DOCROOT}/typo3conf/ext/${ext##*/}" ]; then
-        echo -e "  $ext -> ${DDEV_DOCROOT}/typo3conf/ext/${ext##*/}"
-        ln -frs "$ext" "${DDEV_DOCROOT}/typo3conf/ext/${ext##*/}"
+for extension in "${TYPO3_EXTENSIONS:-packages}"/*; do
+    if [ -d "${extension}" ] && [ ! -d "${DDEV_DOCROOT}/typo3conf/ext/${extension##*/}" ]; then
+        echo -e "  $extension -> ${DDEV_DOCROOT}/typo3conf/ext/${extension##*/}"
+        ln -frs "$extension" "${DDEV_DOCROOT}/typo3conf/ext/${extension##*/}"
     fi
 done
 
