@@ -102,7 +102,7 @@ else
 fi
 
 # Setup links according to the docs see https://docs.typo3.org/m/typo3/guide-installation/master/en-us/QuickInstall/GetAndUnpack/Index.html
-echo -e "${COLOR_INFORMATION}Create symlinks...${COLOR_RESET}"
+echo -e "${COLOR_INFORMATION}Create symlinks for TYPO3...${COLOR_RESET}"
 
 echo -e "  ${TYPO3_SRC_DIRECTORY} -> ${DDEV_DOCROOT}/typo3_src"
 ln -frs "${TYPO3_SRC_DIRECTORY}" "${DDEV_DOCROOT}/typo3_src"
@@ -127,6 +127,16 @@ else
     touch "${DDEV_DOCROOT}/typo3conf/ENABLE_INSTALL_TOOL"
     echo ""
 fi
+
+# Create symlinks for local extensions
+echo -e "${COLOR_INFORMATION}Create symlinks for local extensions...${COLOR_RESET}"
+
+for extension in "${TYPO3_LOCAL_EXTENSIONS:-packages}"/*; do
+    if [ -d "${extension}" ] && [ ! -d "${DDEV_DOCROOT}/typo3conf/ext/${extension##*/}" ]; then
+        echo -e "  $extension -> ${DDEV_DOCROOT}/typo3conf/ext/${extension##*/}"
+        ln -frs "$extension" "${DDEV_DOCROOT}/typo3conf/ext/${extension##*/}"
+    fi
+done
 
 # Show success information
 echo -e "${COLOR_INFORMATION}TYPO3 is installed and ready to setup!${COLOR_RESET}"
