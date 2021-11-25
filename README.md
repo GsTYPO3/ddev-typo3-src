@@ -23,7 +23,7 @@ Please note there are various [branches](branches) for all TYPO3 versions since
 6.2. Each branch is preconfigured to the latest supported components like PHP
 and MariaDB:
 
-* [Download](archive/refs/heads/main.zip) for TYPO3 11.5
+* [Download](archive/refs/heads/11.5.zip) for TYPO3 11.5
 * [Download](archive/refs/heads/10.4.zip) for TYPO3 10.4
 * [Download](archive/refs/heads/9.5.zip) for TYPO3 9.5
 * [Download](archive/refs/heads/8.7.zip) for TYPO3 8.7
