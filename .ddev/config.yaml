@@ -17,6 +17,7 @@ hooks:
 use_dns_when_possible: true
 composer_version: ""
 web_environment:
+- B13_MAKE_EXTENSION_DIR=../packages
 - PATH=/var/www/html/htdocs/typo3/sysext/core/bin:${PATH}
 - TYPO3_CONTEXT=Development
 - TYPO3_MAJOR_VERSION=11

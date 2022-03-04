@@ -4,5 +4,6 @@
 !/htdocs/typo3conf/LocalConfiguration.php
 !/htdocs/typo3conf/PackageStates.php
 !/htdocs/.gitkeep
+/packages/*
 /typo3_src-*
 /typo3_src-*.tar.gz
