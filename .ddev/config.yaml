@@ -111,7 +111,7 @@ web_environment:
 
 # nfs_mount_enabled: false
 # Great performance improvement but requires host configuration first.
-# See https://ddev.readthedocs.io/en/stable/users/performance/#using-nfs-to-mount-the-project-into-the-container
+# See https://ddev.readthedocs.io/en/latest/users/install/performance/#nfs
 
 # fail_on_hook_fail: False
 # Decide whether 'ddev start' should be interrupted by a failing hook
